@@ -8,7 +8,7 @@ Before getting started make sure the following tools are installed.
 * [Homebrew](https://brew.sh) - a package manager for macOS
 * [Kubectl](https://kubernetes.io/docs/setup/minikube/) - Kubernetes command-line tool
 * [Minikube](https://kubernetes.io/docs/setup/minikube/) - Minikube runs a single-node Kubernetes cluster inside a Virtual Machine (VM) 
-* [Helm](https://helm.sh/) - the package manager for Kubernetes
+* [Helm + Tiller](https://helm.sh/) - the package manager for Kubernetes
 
 ### VirtualBox
 Download and install VirtualBox from here: https://www.virtualbox.org/wiki/Downloads
@@ -38,7 +38,7 @@ minikube start
 reference: https://kubernetes.io/docs/tasks/tools/install-minikube/#macos
 
 
-### Helm
+### Helm and Tiller
 Install Helm...
 ```bash
 brew install kubernetes-helm
@@ -100,7 +100,12 @@ kubectl scale statefulset k8demo-cockroachdb --replicas=4
 
 ## Appendix
 
-Open SQL Client
+### Check Logs
+```bash
+kubectl logs k8demo-cockroachdb-2
+```
+
+### Open SQL Client
 ```bash
 kubectl run sql-client -it --image=cockroachdb/cockroach:v19.1.1 --rm --restart=Never -- sql --insecure --host=k8demo-cockroachdb-public
 ```
