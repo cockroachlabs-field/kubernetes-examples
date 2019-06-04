@@ -33,7 +33,7 @@ brew cask install minikube
 
 then start the service...
 ```bash
-minikube start
+minikube start --cpus 4 --memory 8192
 ```
 reference: https://kubernetes.io/docs/tasks/tools/install-minikube/#macos
 
