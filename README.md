@@ -8,7 +8,7 @@ Before getting started make sure the following tools are installed.
 * [Homebrew](https://brew.sh) - a package manager for macOS
 * [Kubectl](https://kubernetes.io/docs/setup/minikube/) - Kubernetes command-line tool
 * [Minikube](https://kubernetes.io/docs/setup/minikube/) - Minikube runs a single-node Kubernetes cluster inside a Virtual Machine (VM) 
-* [Helm](https://helm.sh/)
+* [Helm](https://helm.sh/) - the package manager for Kubernetes
 
 ### VirtualBox
 Download and install VirtualBox from here: https://www.virtualbox.org/wiki/Downloads
