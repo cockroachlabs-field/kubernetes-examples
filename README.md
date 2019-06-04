@@ -49,9 +49,7 @@ then install `tiller` by running the following...
 helm init
 ```
 
-reference: 
-* https://helm.sh/docs/using_helm/#from-homebrew-macos
-* https://helm.sh/docs/using_helm/#installing-tiller
+reference: https://helm.sh/docs/using_helm/#from-homebrew-macos, https://helm.sh/docs/using_helm/#installing-tiller
 
 ## Installing and Running CockroachDB
 Update your `helm` repo to ensure you are pulling the latest version of CockroachDB
