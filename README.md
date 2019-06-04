@@ -73,7 +73,18 @@ In a new tab, run port forwarding so you can access the CockroachDB UI
 kubectl port-forward k8demo-cockroachdb-0 8080
 ```
 
-Open the CockroachDB UI: http://localhost:8080
+If you've run this correctly, the output should look like this:
+
+```
+Forwarding from 127.0.0.1:8080 -> 8080
+Forwarding from [::1]:8080 -> 8080
+Handling connection for 8080
+Handling connection for 8080
+```
+
+This will take over your terminal window, and you'll need to open a new tab to run the next command.
+
+Open the CockroachDB UI in your browser: http://localhost:8080
 
 ## Create and Run a Workload
 
@@ -82,30 +93,47 @@ Create a the `bank` workload on the cluster...
 kubectl run workload-init -it --image=cockroachdb/cockroach:v19.1.1 --rm --restart=Never -- workload init bank 'postgresql://root@k8demo-cockroachdb-public:26257?sslmode=disable'
 ```
 
+If run correctly, there will be no output.
+
 then run the workload...
 ```bash
 kubectl run workload-run -it --image=cockroachdb/cockroach:v19.1.1 --rm --restart=Never -- workload run bank --duration=10m 'postgresql://root@k8demo-cockroachdb-public:26257?sslmode=disable'
 ```
 reference: See https://www.cockroachlabs.com/docs/stable/cockroach-workload.html#bank-workload
 
+This will take over your terminal for 10 minutes, so you'll need to open a new tab for the next command.
+
 ## Kill a Node
 ```bash
 kubectl delete pod k8demo-cockroachdb-2
 ```
+
+If this command works, then `pod "k8demo-cockroachdb-2" deleted` will be displayed.
+
+Note that on the overview page of your dashboard, at (http://localhost:8080/#/overview/list)[http://localhost:8080/#/overview/list], and the node will be automatically be restarted by [ADD THIS]
 
 ## Add a Node
 ```bash
 kubectl scale statefulset k8demo-cockroachdb --replicas=4
 ```
 
+If this runs correctly, you will see `statefulset.apps "k8demo-cockroachdb" scaled`.
+
+After a few seconds, you can refresh the admin UI to see the new node.
+
 ## Appendix
 
 ### Check Logs
 ```bash
-kubectl logs k8demo-cockroachdb-2
+kubectl logs k8demo-cockroachdb-2 | less
 ```
+
+Use the `q` key to exit.
 
 ### Open SQL Client
 ```bash
 kubectl run sql-client -it --image=cockroachdb/cockroach:v19.1.1 --rm --restart=Never -- sql --insecure --host=k8demo-cockroachdb-public
 ```
+
+Use `ctrl-d` or `exit` to exit the SQL shell.
+
