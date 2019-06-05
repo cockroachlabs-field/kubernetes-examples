@@ -161,7 +161,7 @@ Use `ctrl-d` or `exit` to exit the SQL shell.
 
 When you're ready to clean up your test environment, run the following:
 
-Run `ctrl-c` on the kubectl process.
+Stop the kubectl process (`control-c` will work, as will closing the terminal window).
 
 Run the following to purge the installation of CockroachDB with helm:
 
