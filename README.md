@@ -62,9 +62,26 @@ Install CockroachDB using helm.  For the curious... https://github.com/helm/char
 helm install --name k8demo stable/cockroachdb
 ```
 
+Your output will start with:
+```bash
+NAME:   k8demo
+LAST DEPLOYED: <date>
+NAMESPACE: default
+STATUS: DEPLOYED
+```
+
 Check for running pods
 ```bash
 kubectl get pods
+```
+You will see something like the following if run correctly:
+
+```bash
+NAME                            READY     STATUS      RESTARTS   AGE
+k8demo-cockroachdb-0            1/1       Running     0          16s
+k8demo-cockroachdb-1            1/1       Running     0          16s
+k8demo-cockroachdb-2            1/1       Running     0          16s
+k8demo-cockroachdb-init-lmz9d   0/1       Completed   0          16s
 ```
 
 ## Monitor CockroachDB
@@ -75,16 +92,16 @@ kubectl port-forward k8demo-cockroachdb-0 8080
 
 If you've run this correctly, the output should look like this:
 
-```
+```bash
 Forwarding from 127.0.0.1:8080 -> 8080
 Forwarding from [::1]:8080 -> 8080
-Handling connection for 8080
-Handling connection for 8080
 ```
 
-This will take over your terminal window, and you'll need to open a new tab to run the next command.
+With additional lines showing when you go to port 8080 in the browser.
 
-Open the CockroachDB UI in your browser: http://localhost:8080
+This will take over your terminal window, and you'll need to open a new tab to run the next shell command.
+
+Open the CockroachDB UI in your browser: [http://localhost:8080](http://localhost:8080)
 
 ## Create and Run a Workload
 
@@ -110,14 +127,17 @@ kubectl delete pod k8demo-cockroachdb-2
 
 If this command works, then `pod "k8demo-cockroachdb-2" deleted` will be displayed.
 
-Note that on the overview page of your dashboard, at (http://localhost:8080/#/overview/list)[http://localhost:8080/#/overview/list], and the node will be automatically be restarted by [ADD THIS]
+Note that on the overview page of your dashboard, at [http://localhost:8080/#/overview/list](http://localhost:8080/#/overview/list), and the node will be automatically be restarted by Kubernetes shortly.
+
+If you keep an eye on the admin console, you will see the node restart within a few minutes.
+
 
 ## Add a Node
 ```bash
 kubectl scale statefulset k8demo-cockroachdb --replicas=4
 ```
 
-If this runs correctly, you will see `statefulset.apps "k8demo-cockroachdb" scaled`.
+If this runs correctly, the shell will print `statefulset.apps "k8demo-cockroachdb" scaled`.
 
 After a few seconds, you can refresh the admin UI to see the new node.
 
@@ -136,4 +156,28 @@ kubectl run sql-client -it --image=cockroachdb/cockroach:v19.1.1 --rm --restart=
 ```
 
 Use `ctrl-d` or `exit` to exit the SQL shell.
+
+### Cleaning up
+
+When you're ready to clean up your test environment, run the following:
+
+Stop the kubectl process (`control-c` will work, as will closing the terminal window).
+
+Run the following to purge the installation of CockroachDB with helm:
+
+```bash
+helm del --purge k8demo
+```
+
+Stop the minikube environment:
+
+```bash
+minikube stop
+```
+
+... and/or delete it with
+
+```bash
+minikube delete
+```
 
