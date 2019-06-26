@@ -26,7 +26,7 @@ brew install kubernetes-cli
 reference: https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-with-homebrew-on-macos
 
 ### Minikube
-Insttall Minikube...
+Install Minikube...
 ```bash
 brew cask install minikube
 ```
