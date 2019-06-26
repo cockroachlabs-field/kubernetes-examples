@@ -107,14 +107,14 @@ Open the CockroachDB UI in your browser: [http://localhost:8080](http://localhos
 
 Create a the `bank` workload on the cluster...
 ```bash
-kubectl run workload-init -it --image=cockroachdb/cockroach:v19.1.1 --rm --restart=Never -- workload init bank 'postgresql://root@k8demo-cockroachdb-public:26257?sslmode=disable'
+kubectl run workload-init -it --image=cockroachdb/cockroach:v19.1.2 --rm --restart=Never -- workload init bank 'postgresql://root@k8demo-cockroachdb-public:26257?sslmode=disable'
 ```
 
 If run correctly, there will be no output.
 
 then run the workload...
 ```bash
-kubectl run workload-run -it --image=cockroachdb/cockroach:v19.1.1 --rm --restart=Never -- workload run bank --duration=10m 'postgresql://root@k8demo-cockroachdb-public:26257?sslmode=disable'
+kubectl run workload-run -it --image=cockroachdb/cockroach:v19.1.2 --rm --restart=Never -- workload run bank --duration=10m 'postgresql://root@k8demo-cockroachdb-public:26257?sslmode=disable'
 ```
 reference: See https://www.cockroachlabs.com/docs/stable/cockroach-workload.html#bank-workload
 
@@ -152,7 +152,7 @@ Use the `q` key to exit.
 
 ### Open SQL Client
 ```bash
-kubectl run sql-client -it --image=cockroachdb/cockroach:v19.1.1 --rm --restart=Never -- sql --insecure --host=k8demo-cockroachdb-public
+kubectl run sql-client -it --image=cockroachdb/cockroach:v19.1.2 --rm --restart=Never -- sql --insecure --host=k8demo-cockroachdb-public
 ```
 
 Use `ctrl-d` or `exit` to exit the SQL shell.
