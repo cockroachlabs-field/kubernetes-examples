@@ -128,6 +128,11 @@ After a few seconds, you can refresh the admin UI to see the new node.
 
 ## Appendix
 
+### Open Bash Shell to Node
+```bash
+kubectl exec -it k8demo-cockroachdb-0 -- bash
+```
+
 ### Check Logs
 ```bash
 kubectl logs k8demo-cockroachdb-2 | less
