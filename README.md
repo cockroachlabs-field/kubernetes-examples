@@ -74,7 +74,7 @@ Forwarding from 127.0.0.1:8080 -> 8080
 Forwarding from [::1]:8080 -> 8080
 ```
 
-With additional lines showing when you go to port 8080 in the browser.
+With additional lines showing when you go to port `8080` in the browser.
 
 This will take over your terminal window, and you'll need to open a new tab to run the next shell command.
 
@@ -162,7 +162,7 @@ Run the following to purge the installation of CockroachDB with helm:
 helm del --purge k8demo
 ```
 
-Stop the minikube environment:
+Stop the `minikube` environment:
 ```bash
 minikube stop
 ```

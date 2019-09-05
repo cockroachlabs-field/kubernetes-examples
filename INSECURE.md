@@ -1,6 +1,6 @@
 ## Installing and Running CockroachDB (Insecure)
 
-Install CockroachDB using helm.  For the curious... https://github.com/helm/charts/tree/master/stable/cockroachdb
+Install CockroachDB using `helm`.  For the curious... https://github.com/helm/charts/tree/master/stable/cockroachdb
 ```bash
 helm install --name k8demo stable/cockroachdb
 ```
