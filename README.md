@@ -1,4 +1,4 @@
-# Kubernetes Demo
+# Local Kubernetes Example
 The following steps will install Kubernetes locally and configure a 3 node CockroachDB cluster using Helm.  For more information please refer to our official documentation [here](https://www.cockroachlabs.com/docs/stable/orchestrate-a-local-cluster-with-kubernetes-insecure.html).
 
 ## Prerequisites
