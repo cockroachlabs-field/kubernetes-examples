@@ -46,7 +46,7 @@
     k8demo-cockroachdb-init-q42qd   0/1     Completed   0          5h51m
     ```
 
-5. Use the secure client, `cockroachdb-client-secure`, to create a new user.  This will be used to login to the admin UI.  Username is `roach` and password is `password`.
+5. Use the secure client, `cockroachdb-client-secure`, to create a new user.  This will be used to login to the CockroachDB UI.  Username is `roach` and password is `password`.
     ```bash
     kubectl exec -it cockroachdb-client-secure -- ./cockroach sql --execute="CREATE USER roach WITH PASSWORD 'password';" --certs-dir=/cockroach-certs --host=k8demo-cockroachdb-public
     ```
