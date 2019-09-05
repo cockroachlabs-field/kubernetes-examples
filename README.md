@@ -62,7 +62,7 @@ You can use `helm` to install either a `secure` or `insecure` cluster.  Instruct
 * [Secure](SECURE.md) 
 * [Insecure](INSECURE.md)
 
-## Monitor CockroachDB
+## Explore the CockroachDB UI
 In a new tab, run port forwarding so you can access the CockroachDB UI
 ```bash
 kubectl port-forward k8demo-cockroachdb-0 8080
