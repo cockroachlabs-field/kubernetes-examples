@@ -26,7 +26,7 @@
     certificatesigningrequest.certificates.k8s.io/default.node.k8demo-cockroachdb-0 approved
     ```
 
-3. Add the CockroachDB secure client.  See additional documentation [here](https://www.cockroachlabs.com/docs/stable/orchestrate-a-local-cluster-with-kubernetes.html#step-3-use-the-built-in-sql-client).
+3. Add the CockroachDB secure client, `cockroachdb-client-secure`.  See additional documentation [here](https://www.cockroachlabs.com/docs/stable/orchestrate-a-local-cluster-with-kubernetes.html#step-3-use-the-built-in-sql-client).
     ```bash
     curl https://raw.githubusercontent.com/cockroachdb/cockroach/master/cloud/kubernetes/client-secure.yaml | sed -e 's/serviceAccountName\: cockroachdb/serviceAccountName\: k8demo-cockroachdb/g' | kubectl create -f -
     ````
