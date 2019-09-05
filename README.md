@@ -57,32 +57,10 @@ Update your `helm` repo to ensure you are pulling the latest version of Cockroac
 helm repo update
 ```
 
-Install CockroachDB using helm.  For the curious... https://github.com/helm/charts/tree/master/stable/cockroachdb
-```bash
-helm install --name k8demo stable/cockroachdb
-```
+You can use `helm` to install either a `secure` or `insecure` cluster.  Instructions differ slightly for each.
 
-Your output will start with:
-```bash
-NAME:   k8demo
-LAST DEPLOYED: <date>
-NAMESPACE: default
-STATUS: DEPLOYED
-```
-
-Check for running pods
-```bash
-kubectl get pods
-```
-You will see something like the following if run correctly:
-
-```bash
-NAME                            READY     STATUS      RESTARTS   AGE
-k8demo-cockroachdb-0            1/1       Running     0          16s
-k8demo-cockroachdb-1            1/1       Running     0          16s
-k8demo-cockroachdb-2            1/1       Running     0          16s
-k8demo-cockroachdb-init-lmz9d   0/1       Completed   0          16s
-```
+* [Secure](SECURE.md) 
+* [Insecure](INSECURE.md)
 
 ## Monitor CockroachDB
 In a new tab, run port forwarding so you can access the CockroachDB UI
@@ -91,7 +69,6 @@ kubectl port-forward k8demo-cockroachdb-0 8080
 ```
 
 If you've run this correctly, the output should look like this:
-
 ```bash
 Forwarding from 127.0.0.1:8080 -> 8080
 Forwarding from [::1]:8080 -> 8080
@@ -107,14 +84,14 @@ Open the CockroachDB UI in your browser: [http://localhost:8080](http://localhos
 
 Create a the `bank` workload on the cluster...
 ```bash
-kubectl run workload-init -it --image=cockroachdb/cockroach:v19.1.2 --rm --restart=Never -- workload init bank 'postgresql://root@k8demo-cockroachdb-public:26257?sslmode=disable'
+kubectl run workload-init -it --image=cockroachdb/cockroach:latest --rm --restart=Never -- workload init bank 'postgresql://root@k8demo-cockroachdb-public:26257?sslmode=disable'
 ```
 
 If run correctly, there will be no output.
 
 then run the workload...
 ```bash
-kubectl run workload-run -it --image=cockroachdb/cockroach:v19.1.2 --rm --restart=Never -- workload run bank --duration=10m 'postgresql://root@k8demo-cockroachdb-public:26257?sslmode=disable'
+kubectl run workload-run -it --image=cockroachdb/cockroach:latest --rm --restart=Never -- workload run bank --duration=10m 'postgresql://root@k8demo-cockroachdb-public:26257?sslmode=disable'
 ```
 reference: See https://www.cockroachlabs.com/docs/stable/cockroach-workload.html#bank-workload
 
@@ -152,7 +129,7 @@ Use the `q` key to exit.
 
 ### Open SQL Client
 ```bash
-kubectl run sql-client -it --image=cockroachdb/cockroach:v19.1.2 --rm --restart=Never -- sql --insecure --host=k8demo-cockroachdb-public
+kubectl run sql-client -it --image=cockroachdb/cockroach:latest --rm --restart=Never -- sql --insecure --host=k8demo-cockroachdb-public
 ```
 
 Use `ctrl-d` or `exit` to exit the SQL shell.
@@ -164,19 +141,16 @@ When you're ready to clean up your test environment, run the following:
 Stop the kubectl process (`control-c` will work, as will closing the terminal window).
 
 Run the following to purge the installation of CockroachDB with helm:
-
 ```bash
 helm del --purge k8demo
 ```
 
 Stop the minikube environment:
-
 ```bash
 minikube stop
 ```
 
 ... and/or delete it with
-
 ```bash
 minikube delete
 ```
