@@ -84,14 +84,22 @@ Open the CockroachDB UI in your browser: [http://localhost:8080](http://localhos
 
 Create a the `bank` workload on the cluster...
 ```bash
+# insecure cluster
 kubectl run workload-init -it --image=cockroachdb/cockroach:latest --rm --restart=Never -- workload init bank 'postgresql://root@k8demo-cockroachdb-public:26257?sslmode=disable'
+
+# secure cluster
+kubectl exec -it cockroachdb-client-secure -- ./cockroach workload init bank 'postgres://root@k8demo-cockroachdb-public:26257?sslmode=verify-full&sslrootcert=/cockroach-certs/ca.crt&sslcert=/cockroach-certs/client.root.crt&sslkey=/cockroach-certs/client.root.key'
 ```
 
 If run correctly, there will be no output.
 
 then run the workload...
 ```bash
+# insecure cluster
 kubectl run workload-run -it --image=cockroachdb/cockroach:latest --rm --restart=Never -- workload run bank --duration=10m 'postgresql://root@k8demo-cockroachdb-public:26257?sslmode=disable'
+
+# secure cluster
+kubectl exec -it cockroachdb-client-secure -- ./cockroach workload run bank --duration=10m 'postgres://root@k8demo-cockroachdb-public:26257?sslmode=verify-full&sslrootcert=/cockroach-certs/ca.crt&sslcert=/cockroach-certs/client.root.crt&sslkey=/cockroach-certs/client.root.key'
 ```
 reference: See https://www.cockroachlabs.com/docs/stable/cockroach-workload.html#bank-workload
 
@@ -129,7 +137,11 @@ Use the `q` key to exit.
 
 ### Open SQL Client
 ```bash
+# insecure cluster
 kubectl run sql-client -it --image=cockroachdb/cockroach:latest --rm --restart=Never -- sql --insecure --host=k8demo-cockroachdb-public
+
+# secure cluster
+kubectl exec -it cockroachdb-client-secure -- ./cockroach sql --certs-dir=/cockroach-certs --host=k8demo-cockroachdb-public
 ```
 
 Use `ctrl-d` or `exit` to exit the SQL shell.
@@ -138,7 +150,7 @@ Use `ctrl-d` or `exit` to exit the SQL shell.
 
 When you're ready to clean up your test environment, run the following:
 
-Stop the kubectl process (`control-c` will work, as will closing the terminal window).
+Stop the `kubectl` process (`control-c` will work, as will closing the terminal window).
 
 Run the following to purge the installation of CockroachDB with helm:
 ```bash
