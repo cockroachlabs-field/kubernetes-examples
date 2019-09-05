@@ -35,8 +35,8 @@
     ```bash
     kubectl get pods
     ```
+   
     You will see something like the following if run correctly:
-    
     ```bash
     NAME                            READY   STATUS      RESTARTS   AGE
     cockroachdb-client-secure       1/1     Running     0          14s
