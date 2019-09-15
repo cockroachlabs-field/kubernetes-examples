@@ -128,6 +128,12 @@ After a few seconds, you can refresh the admin UI to see the new node.
 
 ## Appendix
 
+### Open the Dashboard
+Running this command opens the `minikube` dashboard in a browser window
+```bash
+minikube dashboard
+```
+
 ### Open Bash Shell to Node
 ```bash
 kubectl exec -it k8demo-cockroachdb-0 -- bash
