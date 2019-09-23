@@ -46,7 +46,7 @@ brew install kubernetes-helm
 
 then install `tiller` by running the following...
 ```bash
-helm init
+helm init --history-max 200
 ```
 
 reference: https://helm.sh/docs/using_helm/#from-homebrew-macos, https://helm.sh/docs/using_helm/#installing-tiller
