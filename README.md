@@ -31,9 +31,9 @@ Install Minikube...
 brew cask install minikube
 ```
 
-then start the service...
+Then start the service.  Here we specify a specific Kubernetes version to avoid a problem with Kubernetes `1.16` and `tiller`...
 ```bash
-minikube start --cpus 4 --memory 8192
+minikube start --cpus 4 --memory 8192 --kubernetes-version v1.15.4
 ```
 reference: https://kubernetes.io/docs/tasks/tools/install-minikube/#macos
 
