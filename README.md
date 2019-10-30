@@ -39,9 +39,9 @@ reference: https://kubernetes.io/docs/tasks/tools/install-minikube/#macos
 
 
 ### Helm and Tiller
-Install Helm...
+Because of the above issues with the latest version of Kubernetes, we need to install an older version of the Helm client (`v2.14.3`) to match the server version bundled with Kubernetes `v1.15.4` specified above.
 ```bash
-brew install kubernetes-helm
+brew install https://raw.githubusercontent.com/Homebrew/homebrew-core/0a17b8e50963de12e8ab3de22e53fccddbe8a226/Formula/kubernetes-helm.rb
 ```
 
 then install `tiller` by running the following...
