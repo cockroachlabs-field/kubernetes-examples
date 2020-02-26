@@ -2,7 +2,7 @@
 
 1. Install CockroachDB using `helm`.  For the curious see our Helm Chart [here](https://github.com/helm/charts/tree/master/stable/cockroachdb).
     ```bash
-    helm install --name k8demo stable/cockroachdb
+    helm install k8demo stable/cockroachdb
     ```
     
     Your output will start with:

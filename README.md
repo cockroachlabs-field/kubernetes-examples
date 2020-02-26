@@ -8,7 +8,7 @@ Before getting started make sure the following tools are installed.
 * [Homebrew](https://brew.sh) - a package manager for macOS
 * [Kubectl](https://kubernetes.io/docs/setup/minikube/) - Kubernetes command-line tool
 * [Minikube](https://kubernetes.io/docs/setup/minikube/) - Minikube runs a single-node Kubernetes cluster inside a Virtual Machine (VM) 
-* [Helm + Tiller](https://helm.sh/) - the package manager for Kubernetes
+* [Helm](https://helm.sh/) - the package manager for Kubernetes
 
 ### VirtualBox
 Download and install VirtualBox from here: https://www.virtualbox.org/wiki/Downloads
@@ -28,30 +28,22 @@ reference: https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-with-
 ### Minikube
 Install Minikube...
 ```bash
-brew cask install minikube
+brew install minikube
 ```
 
-Then start the service.  Here we specify a specific Kubernetes version to avoid a problem with Kubernetes `1.16` and `tiller`...
+Then start the service...
 ```bash
-minikube start --cpus 4 --memory 8192 --kubernetes-version v1.15.4
+minikube start --cpus 4 --memory 8192
 ```
 reference: https://kubernetes.io/docs/tasks/tools/install-minikube/#macos
 
 
-### Helm and Tiller
-Because of the above issues with the latest version of Kubernetes, we need to install an older version of the Helm client (`v2.14.3`) to match the server version bundled with Kubernetes `v1.15.4` specified above.
-```bash
-brew install https://raw.githubusercontent.com/Homebrew/homebrew-core/0a17b8e50963de12e8ab3de22e53fccddbe8a226/Formula/kubernetes-helm.rb
-```
-
-then install `tiller` by running the following...
-```bash
-helm init --history-max 200
-```
-
-reference: https://helm.sh/docs/using_helm/#from-homebrew-macos, https://helm.sh/docs/using_helm/#installing-tiller
-
 ## Installing and Running CockroachDB
+Add the official `stable` chart repository:
+```bash
+helm repo add stable https://kubernetes-charts.storage.googleapis.com
+```
+
 Update your `helm` repo to ensure you are pulling the latest version of CockroachDB
 ```bash
 helm repo update
