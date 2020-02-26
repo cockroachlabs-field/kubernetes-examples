@@ -10,14 +10,16 @@ Before getting started make sure the following tools are installed.
 * [Minikube](https://kubernetes.io/docs/setup/minikube/) - Minikube runs a single-node Kubernetes cluster inside a Virtual Machine (VM) 
 * [Helm](https://helm.sh/) - the package manager for Kubernetes
 
-### VirtualBox
-Download and install VirtualBox from here: https://www.virtualbox.org/wiki/Downloads
-
 ### Homebrew
 ```bash
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
 reference: https://brew.sh/
+
+### VirtualBox
+```bash
+brew cask install virtualbox
+```
 
 ### Kubectl
 ```bash
