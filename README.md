@@ -79,10 +79,10 @@ Open the CockroachDB UI in your browser: [http://localhost:8080](http://localhos
 Create a the `bank` workload on the cluster...
 ```bash
 # insecure cluster
-kubectl run workload-init -it --image=cockroachdb/cockroach:latest --rm --restart=Never -- workload init bank 'postgresql://root@k8demo-cockroachdb-public:26257?sslmode=disable'
+kubectl run workload-init -it --image=cockroachdb/cockroach:latest --rm --restart=Never -- workload init bank 'postgresql://root@k8demo-cockroachdb-public:26257?sslmode=disable&ApplicationName=bank'
 
 # secure cluster
-kubectl exec -it cockroachdb-client-secure -- ./cockroach workload init bank 'postgres://root@k8demo-cockroachdb-public:26257?sslmode=verify-full&sslrootcert=/cockroach-certs/ca.crt&sslcert=/cockroach-certs/client.root.crt&sslkey=/cockroach-certs/client.root.key'
+kubectl exec -it cockroachdb-client-secure -- ./cockroach workload init bank 'postgres://root@k8demo-cockroachdb-public:26257?sslmode=verify-full&ApplicationName=bank&sslrootcert=/cockroach-certs/ca.crt&sslcert=/cockroach-certs/client.root.crt&sslkey=/cockroach-certs/client.root.key'
 ```
 
 If run correctly, there will be no output.
@@ -90,10 +90,10 @@ If run correctly, there will be no output.
 then run the workload...
 ```bash
 # insecure cluster
-kubectl run workload-run -it --image=cockroachdb/cockroach:latest --rm --restart=Never -- workload run bank --duration=10m 'postgresql://root@k8demo-cockroachdb-public:26257?sslmode=disable'
+kubectl run workload-run -it --image=cockroachdb/cockroach:latest --rm --restart=Never -- workload run bank --duration=10m 'postgresql://root@k8demo-cockroachdb-public:26257?sslmode=disable&ApplicationName=bank'
 
 # secure cluster
-kubectl exec -it cockroachdb-client-secure -- ./cockroach workload run bank --duration=10m 'postgres://root@k8demo-cockroachdb-public:26257?sslmode=verify-full&sslrootcert=/cockroach-certs/ca.crt&sslcert=/cockroach-certs/client.root.crt&sslkey=/cockroach-certs/client.root.key'
+kubectl exec -it cockroachdb-client-secure -- ./cockroach workload run bank --duration=10m 'postgres://root@k8demo-cockroachdb-public:26257?sslmode=verify-full&ApplicationName=bank&sslrootcert=/cockroach-certs/ca.crt&sslcert=/cockroach-certs/client.root.crt&sslkey=/cockroach-certs/client.root.key'
 ```
 reference: See https://www.cockroachlabs.com/docs/stable/cockroach-workload.html#bank-workload
 
