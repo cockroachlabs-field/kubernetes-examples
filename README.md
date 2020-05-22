@@ -74,7 +74,7 @@ This will take over your terminal window, and you'll need to open a new tab to r
 
 Open the CockroachDB UI in your browser: [http://localhost:8080](http://localhost:8080)
 
-## Create and Run a Workload
+## Create and Run TPCC
 
 Create a the `tpcc` workload on the cluster...
 ```bash
@@ -98,6 +98,32 @@ kubectl exec -it cockroachdb-client-secure -- ./cockroach workload run tpcc --wa
 reference: See https://www.cockroachlabs.com/docs/stable/cockroach-workload.html#tpcc-workload
 
 This will take over your terminal for 10 minutes, so you'll need to open a new tab for the next command.
+
+## Create and Run YCSB
+
+Create a the `ycsb` workload on the cluster...
+```bash
+# insecure cluster
+kubectl run workload-init -it --image=cockroachdb/cockroach:latest --rm --restart=Never -- workload init ycsb --workload=A 'postgresql://root@k8demo-cockroachdb-public:26257?sslmode=disable&ApplicationName=ycsb'
+
+# secure cluster
+kubectl exec -it cockroachdb-client-secure -- ./cockroach workload init ycsb --workload=A 'postgres://root@k8demo-cockroachdb-public:26257?sslmode=verify-full&ApplicationName=ycsb&sslrootcert=/cockroach-certs/ca.crt&sslcert=/cockroach-certs/client.root.crt&sslkey=/cockroach-certs/client.root.key'
+```
+
+If run correctly, there will be no output.
+
+then run the workload...
+```bash
+# insecure cluster
+kubectl run workload-run -it --image=cockroachdb/cockroach:latest --rm --restart=Never -- workload run ycsb --workload=A --tolerate-errors --duration=10m 'postgresql://root@k8demo-cockroachdb-public:26257?sslmode=disable&ApplicationName=ycsb'
+
+# secure cluster
+kubectl exec -it cockroachdb-client-secure -- ./cockroach workload run ycsb --workload=A --tolerate-errors --duration=10m 'postgres://root@k8demo-cockroachdb-public:26257?sslmode=verify-full&ApplicationName=ycsb&sslrootcert=/cockroach-certs/ca.crt&sslcert=/cockroach-certs/client.root.crt&sslkey=/cockroach-certs/client.root.key'
+```
+reference: See https://www.cockroachlabs.com/docs/v20.1/cockroach-workload.html#ycsb-workload
+
+This will take over your terminal for 10 minutes, so you'll need to open a new tab for the next command.
+
 
 ## Kill a Node
 ```bash
