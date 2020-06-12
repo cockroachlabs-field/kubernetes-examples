@@ -4,8 +4,8 @@ The following steps will install Kubernetes locally and configure a 3 node Cockr
 ## Prerequisites
 Before getting started make sure the following tools are installed.
 
-* [VirtualBox](https://www.virtualbox.org) - VirtualBox is a general-purpose full virtualizer for x86 hardware
 * [Homebrew](https://brew.sh) - a package manager for macOS
+* [VirtualBox](https://www.virtualbox.org) - VirtualBox is a general-purpose full virtualizer for x86 hardware
 * [Kubectl](https://kubernetes.io/docs/setup/minikube/) - Kubernetes command-line tool
 * [Minikube](https://kubernetes.io/docs/setup/minikube/) - Minikube runs a single-node Kubernetes cluster inside a Virtual Machine (VM) 
 * [Helm](https://helm.sh/) - the package manager for Kubernetes
@@ -37,8 +37,14 @@ Then start the service...
 ```bash
 minikube start --cpus 4 --memory 8192
 ```
-reference: https://kubernetes.io/docs/tasks/tools/install-minikube/#macos
+reference: https://kubernetes.io/docs/tasks/tools/install-minikube/#install-minikube
 
+### Helm
+Install Helm...
+```bash
+brew install helm
+```
+reference: https://helm.sh/docs/intro/install/#from-homebrew-macos
 
 ## Installing and Running CockroachDB
 Add the official `stable` chart repository:
