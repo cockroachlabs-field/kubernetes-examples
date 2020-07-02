@@ -47,9 +47,9 @@ brew install helm
 reference: https://helm.sh/docs/intro/install/#from-homebrew-macos
 
 ## Installing and Running CockroachDB
-Add the official `stable` chart repository:
+Add the official `CockroachDB` chart repository:
 ```bash
-helm repo add stable https://kubernetes-charts.storage.googleapis.com
+helm repo add cockroachdb https://charts.cockroachdb.com/
 ```
 
 Update your `helm` repo to ensure you are pulling the latest version of CockroachDB
